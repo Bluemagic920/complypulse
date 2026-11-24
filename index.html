@@ -470,27 +470,35 @@
   <div class="modal-backdrop" id="connectModal">
     <div class="modal">
       <h3>Connect Your Practice's Microsoft 365 Account</h3>
-      <p>Have your IT admin or MSP paste the read-only credentials below. No patient records or emails are ever accessed or stored.</p>
+      <p>No patient records or emails are ever accessed or stored. You can either enter read-only credentials now or send simple instructions to your IT support / MSP.</p>
+
       <div class="info-box">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
           <div>
-            <strong>Read-Only Permissions Needed:</strong><br/>
-            <code>User.Read.All</code> &bull; <code>AuditLog.Read.All</code> &bull; <code>Application.Read.All</code>
+            <strong>Step 1 — Have IT / MSP Create a Read-Only Audit App:</strong><br/>
+            Needs only <code>User.Read.All</code>, <code>AuditLog.Read.All</code> &amp; <code>Application.Read.All</code>.
           </div>
-          <button class="btn btn-primary btn-sm" onclick="copySetupScript()">Copy IT Setup Script</button>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <button class="btn btn-outline btn-sm" onclick="copyItHandoffNote()">Copy Note for IT / MSP</button>
+            <button class="btn btn-primary btn-sm" onclick="copySetupScript()">Copy CLI Script</button>
+          </div>
+        </div>
+        <div style="font-size:0.76rem;color:#99f6e4;">
+          <strong>Tip for Practice Managers:</strong> Click <em>Copy Note for IT / MSP</em> and paste it to whoever manages your clinic email—they can finish this in ~2 minutes.
         </div>
       </div>
+
       <div class="form-group">
-        <label>Directory (Tenant) ID</label>
+        <label>Directory (Tenant) ID <span style="color:var(--muted);font-weight:400;">— Microsoft 365 Organization ID</span></label>
         <input type="text" id="inTenantId" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
       </div>
       <div class="form-group">
-        <label>Application (Client) ID</label>
+        <label>Application (Client) ID <span style="color:var(--muted);font-weight:400;">— Read-Only Audit App ID</span></label>
         <input type="text" id="inClientId" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
       </div>
       <div class="form-group">
-        <label>Client Secret Value</label>
-        <input type="password" id="inClientSecret" placeholder="Enter Read-Only App Secret" />
+        <label>Client Secret Value <span style="color:var(--muted);font-weight:400;">— Read-Only App Secret Key</span></label>
+        <input type="password" id="inClientSecret" placeholder="Paste Read-Only App Secret" />
       </div>
       <div class="error-msg" id="scanError"></div>
       <div class="modal-actions">
@@ -959,6 +967,12 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
       render();
     }
 
+    function copyItHandoffNote() {
+      const note = `Hi team — we're running a zero-PHI HIPAA access & AI app check on ComplyPulse (https://comply.profitharborai.com). It only reads identity, MFA, guest, and OAuth app metadata (no patient charts or email bodies are accessed). Could you create a read-only Entra ID app registration with User.Read.All, AuditLog.Read.All, and Application.Read.All (admin consent granted) and share the Directory (Tenant) ID, Application (Client) ID, and Client Secret so we can run the audit?`;
+      navigator.clipboard.writeText(note);
+      alert("Plain-English message for your IT / MSP copied to clipboard!");
+    }
+
     function copySetupScript() {
       const script = `# Share with your IT Admin or MSP (Run in Azure Cloud Shell with az login)
 $AppName = "ComplyPulse-ReadOnly-HIPAA-Audit"
@@ -1024,8 +1038,7 @@ Write-Host "Directory ID: $TenantId | App ID: $AppId | Secret: $Secret" -Foregro
       state.controls.forEach(c => {
         rows.push([state.workspaceName, fw, codeMap[c.key] || c.key, c.title, c.status, c.summary, new Date().toISOString()]);
       });
-      const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("
-");
+      const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
       const a = document.createElement("a");
       a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
       a.download = `ComplyPulse-${fw}-Risk-Analysis.csv`;
