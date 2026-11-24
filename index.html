@@ -559,9 +559,9 @@
     const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_VwM3o7h2Jxq9_2WkkdE4kg_WKU6bvP6";
 
     const STRIPE_LINKS = {
-      team: "https://comply.profitharborai.com/#pricing",
-      growth: "https://comply.profitharborai.com/#pricing",
-      msp: "https://comply.profitharborai.com/#pricing"
+      team: "https://buy.stripe.com/dRmeVcbgjdpS9BReU5fnO03",
+      growth: "https://buy.stripe.com/bJeaEW70371ubJZ13ffnO04",
+      msp: "https://buy.stripe.com/aFadR8dor71u9BRdQ1fnO05"
     };
 
     const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
@@ -1024,7 +1024,8 @@ Write-Host "Directory ID: $TenantId | App ID: $AppId | Secret: $Secret" -Foregro
       state.controls.forEach(c => {
         rows.push([state.workspaceName, fw, codeMap[c.key] || c.key, c.title, c.status, c.summary, new Date().toISOString()]);
       });
-      const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
+      const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("
+");
       const a = document.createElement("a");
       a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
       a.download = `ComplyPulse-${fw}-Risk-Analysis.csv`;
