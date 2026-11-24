@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ComplyPulse — Microsoft 365 Access Risk Checks for Medical Practices</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
@@ -25,11 +26,12 @@
 
     nav {
       display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-      padding: 18px 6%; border-bottom: 1px solid var(--border);
-      background: rgba(8, 16, 24, 0.92); position: sticky; top: 0; z-index: 40; backdrop-filter: blur(8px);
+      padding: 14px 6%; border-bottom: 1px solid var(--border);
+      background: rgba(8, 16, 24, 0.94); position: sticky; top: 0; z-index: 40; backdrop-filter: blur(8px);
     }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em; }
-    .brand-badge { background: linear-gradient(135deg, #14b8a6, #38bdf8); color: #04131c; font-weight: 900; padding: 3px 8px; border-radius: 6px; font-size: 0.85rem; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; text-decoration: none; color: var(--text); }
+    .brand-logo { width: 38px; height: 38px; border-radius: 9px; object-fit: cover; border: 1px solid rgba(20, 184, 166, 0.4); box-shadow: 0 2px 10px rgba(20, 184, 166, 0.2); }
+    .brand-badge { background: linear-gradient(135deg, #14b8a6, #38bdf8); color: #04131c; font-weight: 900; padding: 4px 8px; border-radius: 7px; font-size: 0.85rem; }
     .nav-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
     .nav-link { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 600; padding: 6px 10px; transition: 0.15s; }
     .nav-link:hover { color: var(--text); }
@@ -57,10 +59,16 @@
     .btn-sm { padding: 6px 11px; font-size: 0.78rem; }
     .btn-block { width: 100%; }
 
-    .hero { padding: 48px 6% 24px; max-width: 1200px; margin: 0 auto; text-align: center; }
+    .hero { padding: 40px 6% 24px; max-width: 1200px; margin: 0 auto; text-align: center; }
+    .hero-logo-wrap { display: flex; justify-content: center; margin-bottom: 16px; }
+    .hero-logo {
+      width: 92px; height: 92px; border-radius: 20px; object-fit: cover;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 12px 32px rgba(20, 184, 166, 0.22);
+    }
     .pill {
       display: inline-block; padding: 5px 14px; border-radius: 999px; font-size: 0.8rem; font-weight: 600;
-      background: rgba(20, 184, 166, 0.12); color: var(--accent); border: 1px solid rgba(20, 184, 166, 0.35); margin-bottom: 16px;
+      background: rgba(20, 184, 166, 0.12); color: var(--accent); border: 1px solid rgba(20, 184, 166, 0.35); margin-bottom: 14px;
     }
     .hero h1 { font-size: clamp(2.1rem, 4vw, 3.15rem); font-weight: 800; letter-spacing: -0.03em; max-width: 900px; margin: 0 auto 14px; line-height: 1.15; }
     .hero p { color: var(--muted); font-size: 1.05rem; max-width: 740px; margin: 0 auto 24px; }
@@ -191,6 +199,8 @@
       color: var(--muted); font-size: 0.83rem;
     }
     footer a { color: var(--accent); text-decoration: none; cursor: pointer; }
+    .footer-brand { display: inline-flex; align-items: center; gap: 8px; vertical-align: middle; margin-right: 6px; }
+    .footer-logo { width: 22px; height: 22px; border-radius: 5px; object-fit: cover; }
 
     .modal-backdrop {
       display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); z-index: 100;
@@ -237,10 +247,11 @@
   </div>
 
   <nav>
-    <div class="brand">
-      <span class="brand-badge">CP</span>
-      <span>ComplyPulse</span>
-    </div>
+    <a href="#" class="brand">
+      <img src="logo.jpg" alt="ComplyPulse" class="brand-logo" onerror="this.style.display='none';document.getElementById('fallbackBadge').style.display='inline-block';" />
+      <span class="brand-badge" id="fallbackBadge" style="display:none;">CP</span>
+      <span>Comply<span style="color:var(--sky);">Pulse</span></span>
+    </a>
     <div class="nav-actions">
       <a href="#controls" class="nav-link">Access Checks</a>
       <a href="#security" class="nav-link">Data Scope</a>
@@ -255,6 +266,9 @@
   </nav>
 
   <section class="hero">
+    <div class="hero-logo-wrap">
+      <img src="logo.jpg" alt="ComplyPulse Shield Logo" class="hero-logo" onerror="this.parentElement.style.display='none';" />
+    </div>
     <div class="pill">Microsoft 365 Access &amp; Third-Party App Checks for Medical Practices</div>
     <h1>Know Who Still Has Access to Your Practice.</h1>
     <p>Built for medical practices, dental groups, clinics, and healthcare IT teams. Check Microsoft 365 accounts, external billing guests, and connected apps to export an Access Risk Report—without querying EHR charts or mailbox message bodies.</p>
@@ -462,7 +476,11 @@
   </section>
 
   <footer>
-    &copy; 2026 ProfitHarbor AI &bull; ComplyPulse (comply.profitharborai.com) &bull; Microsoft 365 Access Risk Reporting &bull;
+    <span class="footer-brand">
+      <img src="logo.jpg" alt="" class="footer-logo" onerror="this.style.display='none';" />
+      <strong>ComplyPulse</strong>
+    </span>
+    &copy; 2026 ProfitHarbor AI (comply.profitharborai.com) &bull; Microsoft 365 Access Risk Reporting &bull;
     Support: <a href="mailto:support@profitharborai.com">support@profitharborai.com</a>
   </footer>
 
