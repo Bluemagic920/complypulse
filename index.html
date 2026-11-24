@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ComplyPulse — HIPAA Access &amp; AI Risk Checks for Medical Practices</title>
+  <title>ComplyPulse — Microsoft 365 Access Risk Checks for Medical Practices</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
@@ -232,7 +232,7 @@
 <body>
 
   <div class="upgrade-banner" id="upgradeBanner">
-    <span>Subscription active! Thank you for upgrading to ComplyPulse Healthcare Pro.</span>
+    <span>Subscription active! Thank you for upgrading to ComplyPulse.</span>
     <button class="btn btn-outline btn-sm" onclick="document.getElementById('upgradeBanner').classList.remove('open')">Dismiss</button>
   </div>
 
@@ -242,11 +242,11 @@
       <span>ComplyPulse</span>
     </div>
     <div class="nav-actions">
-      <a href="#controls" class="nav-link">HIPAA Safeguards</a>
-      <a href="#security" class="nav-link">Zero-PHI Guarantee</a>
+      <a href="#controls" class="nav-link">Access Checks</a>
+      <a href="#security" class="nav-link">Data Scope</a>
       <a href="#pricing" class="nav-link">Pricing</a>
       <span class="user-chip" id="userEmailChip" style="display:none;"></span>
-      <button class="btn btn-outline btn-sm" id="btnHistory" style="display:none;" onclick="openHistoryModal()">Saved Risk Audits</button>
+      <button class="btn btn-outline btn-sm" id="btnHistory" style="display:none;" onclick="openHistoryModal()">Saved Snapshots</button>
       <button class="btn btn-outline btn-sm" onclick="loadSampleControls()">Reset Clinic Demo</button>
       <button class="btn btn-primary btn-sm" onclick="openConnectModal()">Run Practice Audit</button>
       <button class="btn btn-outline btn-sm" id="btnAuthNav" onclick="openAuthModal()">Sign In</button>
@@ -255,12 +255,12 @@
   </nav>
 
   <section class="hero">
-    <div class="pill">HIPAA Access &amp; AI Risk Checks for Medical Practices &bull; Zero Patient Charts Accessed</div>
-    <h1>Know Immediately Who Still Has Access to Your Clinic's Email, Files &amp; AI Tools</h1>
-    <p>Built for medical practices, dental groups, clinics, and healthcare IT teams. Spot departed staff still holding access, inactive billing vendors, and unvetted AI note-takers—and print your HIPAA Risk Analysis packet in one click.</p>
+    <div class="pill">Microsoft 365 Access &amp; Third-Party App Checks for Medical Practices</div>
+    <h1>Know Who Still Has Access to Your Practice.</h1>
+    <p>Built for medical practices, dental groups, clinics, and healthcare IT teams. Check Microsoft 365 accounts, external billing guests, and connected apps to export an Access Risk Report—without querying EHR charts or mailbox message bodies.</p>
     <div class="hero-cta">
-      <button class="btn btn-primary" onclick="openConnectModal()">Run Read-Only HIPAA Scan</button>
-      <button class="btn btn-sky" onclick="exportAuditorPdf()">Download HIPAA Risk Analysis PDF</button>
+      <button class="btn btn-primary" onclick="openConnectModal()">Run Read-Only M365 Scan</button>
+      <button class="btn btn-sky" onclick="exportAuditorPdf()">Export Access Risk Report (PDF)</button>
       <a href="#pricing" class="btn btn-outline">View Clinic Plans</a>
     </div>
   </section>
@@ -268,15 +268,15 @@
   <div class="audience-strip">
     <div class="audience-card">
       <div class="audience-role">Practice Managers &amp; Clinic Owners</div>
-      <p>Verify that former nurses, front-desk staff, and providers are locked out and generate proof for your annual HIPAA Security Risk Analysis.</p>
+      <p>Review account status and generate a snapshot Access Risk Report to support your broader HIPAA safeguard documentation.</p>
     </div>
     <div class="audience-card">
       <div class="audience-role">Privacy &amp; Compliance Officers</div>
-      <p>Catch unapproved AI scribes or third-party apps reading staff email/files without a BAA—and log sign-offs in one clean audit trail.</p>
+      <p>Spot staff-connected third-party or AI apps with broad directory or file permissions and record review notes in one log.</p>
     </div>
     <div class="audience-card">
       <div class="audience-role">Healthcare MSPs &amp; IT Support</div>
-      <p>Run read-only Microsoft 365 checks across clinics with zero patient data exposure and copy dry-run fix scripts in seconds.</p>
+      <p>Run read-only Microsoft Graph checks across client tenants and copy dry-run PowerShell snippets for IT review.</p>
     </div>
   </div>
 
@@ -284,7 +284,7 @@
     <div class="dashboard-shell">
       <div class="demo-banner" id="demoBanner">
         <div>
-          <strong>Sample Medical Practice Sandbox:</strong> Displayed clinic ("Northstar Outpatient &amp; Dental Group"), staff accounts, and findings are simulated demo data. Connect your practice's Microsoft 365 account to run a live HIPAA check.
+          <strong>Sample Medical Practice Sandbox:</strong> Displayed clinic ("Northstar Outpatient &amp; Dental Group"), staff accounts, and findings are simulated demo data. Connect a Microsoft 365 tenant to run a live scan.
         </div>
         <button class="btn btn-outline btn-sm" onclick="openConnectModal()">Connect Practice M365</button>
       </div>
@@ -292,66 +292,66 @@
       <div class="dash-topbar">
         <div class="dash-title">
           <span class="status-dot" id="statusDot"></span>
-          <input type="text" class="client-input" id="workspaceInput" value="Sample Practice — Northstar Outpatient & Dental (85 Staff)" onchange="state.workspaceName = this.value" title="Edit practice or clinic name for your HIPAA PDF report" />
+          <input type="text" class="client-input" id="workspaceInput" value="Sample Practice — Northstar Outpatient & Dental (85 Staff)" onchange="state.workspaceName = this.value" title="Edit practice or clinic name for your Access Risk Report" />
         </div>
         <div class="dash-controls">
           <button class="btn btn-primary btn-sm" id="btnSaveScan" onclick="saveCurrentScan()">Save Audit Snapshot</button>
-          <button class="btn btn-sky btn-sm" onclick="exportAuditorPdf()">Export HIPAA Risk Analysis PDF</button>
+          <button class="btn btn-sky btn-sm" onclick="exportAuditorPdf()">Export Access Risk Report (PDF)</button>
           <button class="btn btn-outline btn-sm" onclick="exportEvidenceCsv()">Export CSV Log</button>
         </div>
       </div>
 
       <div class="framework-bar">
         <div class="fw-group">
-          <span class="fw-label">Compliance Standard:</span>
+          <span class="fw-label">Reference Mapping:</span>
           <select class="fw-select" id="frameworkSelect" onchange="render()">
-            <option value="HIPAA" selected>HIPAA Security Rule (45 CFR § 164.308 / § 164.312)</option>
-            <option value="SOC2">SOC 2 Type II (Healthcare Vendors &amp; Billing Partners)</option>
-            <option value="ISO27001">ISO/IEC 27001:2022 (Healthcare Information Security)</option>
+            <option value="HIPAA" selected>HIPAA Security Rule Reference (45 CFR § 164.308 / § 164.312)</option>
+            <option value="SOC2">SOC 2 Type II Reference (Access &amp; Logical Security)</option>
+            <option value="ISO27001">ISO/IEC 27001:2022 Reference (Identity &amp; Access)</option>
           </select>
         </div>
         <div style="color:var(--muted);font-size:0.8rem;">
-          Audit Timestamp: <strong style="color:var(--text);" id="evidenceTimestamp"></strong>
+          Snapshot Timestamp: <strong style="color:var(--text);" id="evidenceTimestamp"></strong>
         </div>
       </div>
 
       <div class="kpi-grid">
         <div class="kpi-card">
-          <div class="kpi-label">HIPAA Safeguard Score</div>
+          <div class="kpi-label">Check Pass Rate</div>
           <div class="kpi-val val-teal" id="kpiScore">0%</div>
-          <div class="kpi-sub" id="kpiScoreSub">0 of 0 safeguards passing</div>
+          <div class="kpi-sub" id="kpiScoreSub">0 of 0 checks passing</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">Open Access Risks</div>
+          <div class="kpi-label">Open Flagged Items</div>
           <div class="kpi-val val-red" id="kpiExceptions">0</div>
-          <div class="kpi-sub">Staff accounts or AI apps to review</div>
+          <div class="kpi-sub">Accounts or apps flagged in current run</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">Documented Exceptions</div>
+          <div class="kpi-label">Logged Review Notes</div>
           <div class="kpi-val val-amber" id="kpiWaivers">0</div>
-          <div class="kpi-sub">Signed off by Privacy/Security Officer</div>
+          <div class="kpi-sub">Recorded exceptions &amp; BAA notes</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">Clinical &amp; Admin Staff</div>
+          <div class="kpi-label">Directory Accounts</div>
           <div class="kpi-val val-sky" id="kpiUsers">85</div>
           <div class="kpi-sub" id="scanModeSub">Simulated Clinic Data</div>
         </div>
       </div>
 
       <div class="tabs">
-        <div class="tab active" id="tabControls" onclick="switchTab('controls')">HIPAA Safeguard Checks (<span id="countControls">0</span>)</div>
-        <div class="tab" id="tabExceptions" onclick="switchTab('exceptions')">Privacy Officer Sign-Off &amp; BAA Log (<span id="countExceptions">0</span>)</div>
+        <div class="tab active" id="tabControls" onclick="switchTab('controls')">Access &amp; App Checks (<span id="countControls">0</span>)</div>
+        <div class="tab" id="tabExceptions" onclick="switchTab('exceptions')">Review &amp; Exception Log (<span id="countExceptions">0</span>)</div>
       </div>
 
       <div class="table-wrap" id="panelControls">
         <table>
           <thead>
             <tr>
-              <th>HIPAA Rule</th>
-              <th>Safeguard Requirement</th>
+              <th>Reference</th>
+              <th>Access Check</th>
               <th>Status</th>
-              <th>Practice Findings</th>
-              <th>Review &amp; IT Handoff</th>
+              <th>Findings Summary</th>
+              <th>Inspect &amp; IT Snippet</th>
             </tr>
           </thead>
           <tbody id="tbodyControls"></tbody>
@@ -362,10 +362,10 @@
         <table>
           <thead>
             <tr>
-              <th>HIPAA Rule</th>
-              <th>Staff Member / Vendor App</th>
+              <th>Reference</th>
+              <th>Account / App</th>
               <th>Disposition</th>
-              <th>Privacy / Security Officer Note</th>
+              <th>Reviewer Note</th>
               <th>Timestamp</th>
             </tr>
           </thead>
@@ -378,25 +378,25 @@
   <section class="trust-section" id="security">
     <div class="trust-box">
       <div class="trust-header">
-        <h2>Zero-PHI Architecture: Built for Healthcare Privacy</h2>
-        <p>Audit staff access and unapproved AI tools without ever exposing patient records, emails, or clinical charts.</p>
+        <h2>How ComplyPulse Handles Data &amp; Scope</h2>
+        <p>Four point-in-time Microsoft Graph checks generate a scoped Access Risk Report—not a full organizational HIPAA Security Risk Analysis on their own.</p>
       </div>
       <div class="trust-grid">
         <div class="trust-item">
-          <h4>1. Zero Patient Data (ePHI) Touched</h4>
-          <p>ComplyPulse never reads patient charts, EHR systems, email contents, or clinical files. It only checks staff login status, MFA protection, and third-party app permissions.</p>
+          <h4>1. Targeted Scope (Not a Full SRA)</h4>
+          <p>ComplyPulse audits selected Microsoft 365 user, guest, and service principal records. A complete HIPAA Security Risk Analysis also requires physical, administrative, and EHR workflow evaluations.</p>
         </div>
         <div class="trust-item">
-          <h4>2. Read-Only Practice Access</h4>
-          <p>Your IT support or MSP grants strictly read-only access (<code>User.Read.All</code>, <code>AuditLog.Read.All</code>, <code>Application.Read.All</code>). Credentials are held in memory and never stored.</p>
+          <h4>2. Read-Only Graph Permissions</h4>
+          <p>The scan requests read-only Microsoft Graph scopes (<code>User.Read.All</code>, <code>AuditLog.Read.All</code>, <code>Application.Read.All</code>) and does not query EHR databases or email message contents.</p>
         </div>
         <div class="trust-item">
-          <h4>3. Safe Offboarding &amp; Record Retention</h4>
-          <p>ComplyPulse flags departed clinicians or front-desk staff who still have active accounts—and reminds IT to preserve email retention holds before removing licenses.</p>
+          <h4>3. Point-in-Time Snapshot Runs</h4>
+          <p>Scans run when triggered or reloaded from saved snapshots; unverified tenant runs should be checked against your live Microsoft Entra admin center before relying on them.</p>
         </div>
         <div class="trust-item">
-          <h4>4. Annual HIPAA Risk Analysis Proof</h4>
-          <p>Download a timestamped PDF packet documenting your technical safeguards for OCR audits, cyber-insurance renewals, and annual HIPAA compliance reviews. Support: <strong>support@profitharborai.com</strong>.</p>
+          <h4>4. Dry-Run IT Snippets &amp; Support</h4>
+          <p>Generated PowerShell snippets include <code>-WhatIf</code> so IT staff can inspect actions first and verify retention holds before changing accounts. Support: <strong>support@profitharborai.com</strong>.</p>
         </div>
       </div>
     </div>
@@ -404,9 +404,9 @@
 
   <section class="pricing-section" id="pricing">
     <div class="pricing-header">
-      <div class="pill">Simple Practice &amp; Multi-Clinic Plans</div>
-      <h2>Protect Your Practice Without Enterprise Consulting Fees</h2>
-      <p>Continuous HIPAA access &amp; AI risk monitoring for less than a single hour of legal or compliance consulting.</p>
+      <div class="pill">Practice &amp; Multi-Clinic Plans</div>
+      <h2>Access Risk Reporting for Clinics &amp; Healthcare IT</h2>
+      <p>Point-in-time Microsoft 365 access checks, review logs, and downloadable Access Risk Reports.</p>
     </div>
 
     <div class="pricing-grid">
@@ -415,12 +415,12 @@
           <div class="plan-name">Single Clinic / Practice</div>
           <div class="plan-desc">For independent medical, dental, behavioral health, and specialty practices.</div>
           <div class="plan-price">$149<span>/mo</span></div>
-          <div class="plan-roi">Up to 300 clinical &amp; administrative staff</div>
+          <div class="plan-roi">Up to 300 directory accounts</div>
           <ul class="plan-features">
-            <li>Continuous HIPAA Security Rule safeguard checks</li>
-            <li>Departed clinician &amp; front-desk lockout verification</li>
-            <li>Unapproved AI scribe &amp; third-party app alerts</li>
-            <li>One-click HIPAA Risk Analysis PDF &amp; CSV packets</li>
+            <li>Read-only Microsoft 365 access &amp; app checks</li>
+            <li>Inactive &amp; disabled account review findings</li>
+            <li>Connected third-party &amp; AI app visibility</li>
+            <li>On-demand Access Risk Report PDF &amp; CSV export</li>
           </ul>
         </div>
         <button class="btn btn-outline btn-block" onclick="checkoutPlan('team')">Start Single Clinic Plan</button>
@@ -432,12 +432,12 @@
           <div class="plan-name">Multi-Site Healthcare Group</div>
           <div class="plan-desc">For regional clinics, surgery centers, and multi-location dental/medical groups.</div>
           <div class="plan-price">$299<span>/mo</span></div>
-          <div class="plan-roi">Up to 3 Microsoft 365 tenants (1,500 staff)</div>
+          <div class="plan-roi">Up to 3 Microsoft 365 tenants (1,500 accounts)</div>
           <ul class="plan-features">
             <li>Everything in Single Clinic Plan</li>
-            <li>Saved historical Risk Analysis snapshots</li>
-            <li>Privacy Officer BAA &amp; exception sign-off log</li>
-            <li>External billing &amp; vendor guest access reviews</li>
+            <li>Saved point-in-time audit snapshots in Supabase</li>
+            <li>Reviewer note &amp; BAA exception log</li>
+            <li>External guest account inactivity checks</li>
           </ul>
         </div>
         <button class="btn btn-primary btn-block" onclick="checkoutPlan('growth')">Start Multi-Site Plan</button>
@@ -446,14 +446,14 @@
       <div class="plan-card">
         <div>
           <div class="plan-name">Healthcare MSP / Compliance Partner</div>
-          <div class="plan-desc">For Healthcare IT providers and HIPAA consultants managing multiple practices.</div>
+          <div class="plan-desc">For Healthcare IT providers and compliance advisors supporting multiple practices.</div>
           <div class="plan-price">$599<span>/mo</span></div>
-          <div class="plan-roi">Unlimited client medical practices</div>
+          <div class="plan-roi">Multiple client practice workspaces</div>
           <ul class="plan-features">
-            <li>Unlimited client clinics &amp; staff accounts</li>
-            <li>Practice-branded HIPAA Risk Analysis PDFs</li>
-            <li>Multi-clinic saved compliance workspaces</li>
-            <li>Bulk IT offboarding scripts &amp; priority support</li>
+            <li>Multi-clinic scan runs &amp; saved snapshots</li>
+            <li>Practice-labeled Access Risk Report PDFs</li>
+            <li>Reviewer exception history per workspace</li>
+            <li>Dry-run PowerShell handoff snippets &amp; support</li>
           </ul>
         </div>
         <button class="btn btn-outline btn-block" onclick="checkoutPlan('msp')">Start Healthcare MSP Plan</button>
@@ -462,21 +462,21 @@
   </section>
 
   <footer>
-    &copy; 2026 ProfitHarbor AI &bull; ComplyPulse Healthcare (comply.profitharborai.com) &bull; Zero-PHI HIPAA Access Governance &bull;
+    &copy; 2026 ProfitHarbor AI &bull; ComplyPulse (comply.profitharborai.com) &bull; Microsoft 365 Access Risk Reporting &bull;
     Support: <a href="mailto:support@profitharborai.com">support@profitharborai.com</a>
   </footer>
 
   <!-- Connect Modal -->
   <div class="modal-backdrop" id="connectModal">
     <div class="modal">
-      <h3>Connect Your Practice's Microsoft 365 Account</h3>
-      <p>No patient records or emails are ever accessed or stored. You can either enter read-only credentials now or send simple instructions to your IT support / MSP.</p>
+      <h3>Connect a Microsoft 365 Tenant</h3>
+      <p>Uses read-only Microsoft Graph scopes against directory, audit, and application metadata. You can enter credentials or copy handoff instructions for your IT/MSP.</p>
 
       <div class="info-box">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
           <div>
-            <strong>Step 1 — Have IT / MSP Create a Read-Only Audit App:</strong><br/>
-            Needs only <code>User.Read.All</code>, <code>AuditLog.Read.All</code> &amp; <code>Application.Read.All</code>.
+            <strong>Step 1 — Read-Only App Registration:</strong><br/>
+            Scopes: <code>User.Read.All</code>, <code>AuditLog.Read.All</code> &amp; <code>Application.Read.All</code>.
           </div>
           <div style="display:flex;gap:6px;flex-wrap:wrap;">
             <button class="btn btn-outline btn-sm" onclick="copyItHandoffNote()">Copy Note for IT / MSP</button>
@@ -484,7 +484,7 @@
           </div>
         </div>
         <div style="font-size:0.76rem;color:#99f6e4;">
-          <strong>Tip for Practice Managers:</strong> Click <em>Copy Note for IT / MSP</em> and paste it to whoever manages your clinic email—they can finish this in ~2 minutes.
+          <strong>Tip for Practice Managers:</strong> Click <em>Copy Note for IT / MSP</em> and send it to your IT administrator to provision the read-only app credentials.
         </div>
       </div>
 
@@ -503,7 +503,7 @@
       <div class="error-msg" id="scanError"></div>
       <div class="modal-actions">
         <button class="btn btn-outline" onclick="document.getElementById('connectModal').classList.remove('open')">Cancel</button>
-        <button class="btn btn-primary" id="btnRunScan" onclick="runLiveComplianceScan()">Run HIPAA Audit</button>
+        <button class="btn btn-primary" id="btnRunScan" onclick="runLiveComplianceScan()">Run M365 Scan</button>
       </div>
     </div>
   </div>
@@ -512,7 +512,7 @@
   <div class="modal-backdrop" id="authModal">
     <div class="modal">
       <h3>Sign In to ComplyPulse</h3>
-      <p>Save timestamped HIPAA Risk Analysis snapshots for your practice's compliance binder.</p>
+      <p>Save point-in-time Access Risk Report snapshots for your clinic workspace.</p>
       <div class="form-group">
         <label>Practice / Work Email</label>
         <input type="email" id="authEmail" placeholder="admin@yourclinic.com" />
@@ -534,8 +534,8 @@
   <!-- Saved History Modal -->
   <div class="modal-backdrop" id="historyModal">
     <div class="modal">
-      <h3>Saved HIPAA Risk Analysis Packets</h3>
-      <p>Reload any previous snapshot to show auditors continuous compliance monitoring.</p>
+      <h3>Saved Access Risk Snapshots</h3>
+      <p>Reload a saved snapshot to compare point-in-time findings.</p>
       <div class="history-list" id="historyList">Loading...</div>
       <div class="modal-actions">
         <button class="btn btn-outline" onclick="document.getElementById('historyModal').classList.remove('open')">Close</button>
@@ -546,17 +546,17 @@
   <!-- Remediation / Waiver Modal -->
   <div class="modal-backdrop" id="actionModal">
     <div class="modal">
-      <h3 id="actionModalTitle">IT Handoff Fix &amp; Privacy Officer Sign-Off</h3>
+      <h3 id="actionModalTitle">IT Snippet &amp; Reviewer Note</h3>
       <p id="actionModalDesc"></p>
       <pre class="code-box" id="actionScriptBox"></pre>
       <div class="form-group" style="margin-top:14px;">
-        <label>Document BAA / Privacy Officer Approval (Optional — Appears in HIPAA PDF)</label>
-        <input type="text" id="waiverNoteInput" placeholder="e.g., Signed BAA on file with vendor — approved by Practice Privacy Officer" />
+        <label>Reviewer Note or BAA Reference (Optional — Included in Report)</label>
+        <input type="text" id="waiverNoteInput" placeholder="e.g., BAA documented on file; reviewed by clinic privacy lead" />
       </div>
       <div class="modal-actions">
         <button class="btn btn-outline" onclick="document.getElementById('actionModal').classList.remove('open')">Close</button>
-        <button class="btn btn-sky" onclick="recordExceptionWaiver()">Log Privacy Officer Approval</button>
-        <button class="btn btn-primary" onclick="copyActionScript()">Copy IT Handoff Script</button>
+        <button class="btn btn-sky" onclick="recordExceptionWaiver()">Log Review Note</button>
+        <button class="btn btn-primary" onclick="copyActionScript()">Copy Dry-Run Snippet</button>
       </div>
     </div>
   </div>
@@ -597,41 +597,41 @@
     const SAMPLE_CONTROLS = [
       {
         key: "mfa",
-        title: "Two-Factor Login (MFA) Enforced for All Clinicians & Staff",
+        title: "MFA Method Presence Across Directory Accounts",
         status: "PASS",
-        summary: "85 / 85 active clinic staff have two-factor authentication enabled for email & cloud files.",
+        summary: "85 / 85 sample accounts show registered MFA methods in demo snapshot.",
         items: [],
-        script: "# HIPAA § 164.312(d) PASS — All 85 active clinic staff have MFA enabled."
+        script: "# Sample check (§ 164.312(d) reference) — Demo accounts show MFA methods registered."
       },
       {
         key: "offboard",
-        title: "Departed Clinicians & Staff Fully Removed from Active Licenses & Roles",
+        title: "Disabled Accounts Still Holding Licenses or Directory Roles",
         status: "FAIL",
-        summary: "3 former staff members still have active Microsoft 365 licenses or shared mailbox permissions.",
+        summary: "3 sample former staff accounts appear disabled or ended with remaining license/role assignments.",
         items: [
-          { name: "Jordan Vance, RN (Former Nursing Lead)", upn: "jvance@northstarclinic.org", detail: "Departed Staff · Still holds Shared Clinical Inbox access", detected: "2026-11-18" },
-          { name: "Claire Bennett (Former Front Desk)", upn: "cbennett@northstarclinic.org", detail: "Departed Staff · Active M365 License (Verify Retention Hold)", detected: "2026-11-12" },
-          { name: "Devon Brooks, PA-C (Per-Diem Provider)", upn: "dbrooks@northstarclinic.org", detail: "Contract Ended · Remote Access Group Member", detected: "2026-11-09" }
+          { name: "Jordan Vance, RN (Former Nursing Lead)", upn: "jvance@northstarclinic.org", detail: "Account flagged in sample · Shared Clinical Inbox assignment listed", detected: "2026-11-18" },
+          { name: "Claire Bennett (Former Front Desk)", upn: "cbennett@northstarclinic.org", detail: "Account flagged in sample · License assigned (verify retention hold)", detected: "2026-11-12" },
+          { name: "Devon Brooks, PA-C (Per-Diem Provider)", upn: "dbrooks@northstarclinic.org", detail: "Account flagged in sample · Access group membership listed", detected: "2026-11-09" }
         ],
-        script: `# IT Handoff Script — Revoke active login tokens for departed staff (Safe Dry-Run)
+        script: `# Dry-run PowerShell snippet — Inspect sessions before revoking (uses -WhatIf)
 Connect-MgGraph -Scopes "User.ReadWrite.All"
 $Staff = @("jvance@northstarclinic.org", "cbennett@northstarclinic.org", "dbrooks@northstarclinic.org")
 foreach ($Upn in $Staff) {
     $User = Get-MgUser -UserId $Upn
     Revoke-MgUserSignInSession -UserId $User.Id -WhatIf
-    Write-Host "Revoked active sessions for $Upn (Dry-Run)" -ForegroundColor Cyan
+    Write-Host "Dry-run session revoke for $Upn" -ForegroundColor Cyan
 }`
       },
       {
         key: "guest",
-        title: "Quarterly Access Review of External Billing & Lab Vendors",
+        title: "External Guest Accounts Inactive 90+ Days",
         status: "FAIL",
-        summary: "2 external vendor accounts have been inactive for 90+ days and still have clinic folder access.",
+        summary: "2 sample external guest accounts show no sign-in for 90+ days.",
         items: [
-          { name: "Apex Medical Billing Rep", upn: "r.cole_apexbilling.com#EXT#@northstarclinic.onmicrosoft.com", detail: "Inactive 114 days · Billing & Claims Shared Folder", detected: "2026-11-20" },
-          { name: "External Radiology Consultant", upn: "kpatel_imaging.io#EXT#@northstarclinic.onmicrosoft.com", detail: "Inactive 98 days · Clinical Referrals Team", detected: "2026-11-20" }
+          { name: "Apex Medical Billing Rep", upn: "r.cole_apexbilling.com#EXT#@northstarclinic.onmicrosoft.com", detail: "Sample guest · 114 days since last sign-in", detected: "2026-11-20" },
+          { name: "External Radiology Consultant", upn: "kpatel_imaging.io#EXT#@northstarclinic.onmicrosoft.com", detail: "Sample guest · 98 days since last sign-in", detected: "2026-11-20" }
         ],
-        script: `# IT Handoff Script — Disable inactive external vendor accounts (Safe Dry-Run)
+        script: `# Dry-run PowerShell snippet — Preview disabling inactive guest accounts (uses -WhatIf)
 Connect-MgGraph -Scopes "User.ReadWrite.All"
 $Vendors = @("r.cole_apexbilling.com#EXT#@northstarclinic.onmicrosoft.com", "kpatel_imaging.io#EXT#@northstarclinic.onmicrosoft.com")
 foreach ($V in $Vendors) {
@@ -640,13 +640,13 @@ foreach ($V in $Vendors) {
       },
       {
         key: "oauth",
-        title: "Unapproved AI Scribes & Third-Party Apps Blocked from Patient Email/Files",
+        title: "Third-Party & AI Service Principals With Broad App Permissions",
         status: "FAIL",
-        summary: "1 unverified AI tool was connected by a staff member with permission to read emails and documents.",
+        summary: "1 sample third-party app permission entry flagged for BAA and scope review.",
         items: [
-          { name: "AI-ChartNote Summarizer (No BAA Verified)", upn: "Staff Self-Connected App", detail: "Can read Emails & OneDrive Documents (Mail.Read, Files.ReadWrite.All)", detected: "2026-11-21" }
+          { name: "AI-ChartNote Summarizer (Sample Entry)", upn: "Tenant App Consent", detail: "Sample broad permission scope flagged for review", detected: "2026-11-21" }
         ],
-        script: `# IT Handoff Script — Disable unapproved third-party AI app (Safe Dry-Run)
+        script: `# Dry-run PowerShell snippet — Preview disabling a service principal (uses -WhatIf)
 Connect-MgGraph -Scopes "Application.ReadWrite.All"
 Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEnabled:$false -WhatIf`
       }
@@ -732,7 +732,7 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
       });
       btn.disabled = false;
       btn.textContent = "Save Audit Snapshot";
-      alert(error ? "Error saving snapshot: " + error.message : "HIPAA Risk Analysis snapshot saved!");
+      alert(error ? "Error saving snapshot: " + error.message : "Access Risk snapshot saved!");
     }
 
     async function openHistoryModal() {
@@ -765,7 +765,7 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
       state.totalUsers = row.total_users;
       state.controls = row.controls || [];
       state.exceptions = row.exceptions || [];
-      state.modeLabel = "Saved Practice Audit";
+      state.modeLabel = "Saved Snapshot";
       document.getElementById("workspaceInput").value = state.workspaceName;
       document.getElementById("frameworkSelect").value = row.framework || "HIPAA";
       document.getElementById("historyModal").classList.remove("open");
@@ -786,7 +786,7 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
       }
       errEl.style.display = "none";
       btn.disabled = true;
-      btn.textContent = "Scanning Practice Access...";
+      btn.textContent = "Scanning Tenant...";
 
       try {
         const res = await fetch(`${API_BASE}/api/scan/compliance`, {
@@ -795,14 +795,14 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
           body: JSON.stringify({ tenant_id, client_id, client_secret, guest_inactive_days: 90 })
         });
         const data = await res.json();
-        if (!res.ok) throw new Error(data.detail || "Practice audit failed.");
+        if (!res.ok) throw new Error(data.detail || "Scan failed.");
 
         state.isDemo = false;
         state.controls = data.controls || [];
         state.totalUsers = data.total_users || 0;
         state.exceptions = [];
-        state.workspaceName = `Live Practice Audit — ${tenant_id.slice(0, 8)}...`;
-        state.modeLabel = `Live Audit (${new Date().toLocaleTimeString()})`;
+        state.workspaceName = `M365 Snapshot — ${tenant_id.slice(0, 8)}...`;
+        state.modeLabel = `Snapshot (${new Date().toLocaleTimeString()})`;
         document.getElementById("workspaceInput").value = state.workspaceName;
         document.getElementById("evidenceTimestamp").textContent = new Date().toLocaleString();
         document.getElementById("connectModal").classList.remove("open");
@@ -812,7 +812,7 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
         errEl.style.display = "block";
       } finally {
         btn.disabled = false;
-        btn.textContent = "Run HIPAA Audit";
+        btn.textContent = "Run M365 Scan";
       }
     }
 
@@ -842,7 +842,7 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
       const openItems = state.controls.reduce((sum, c) => sum + (c.status === "FAIL" ? c.items.length : 0), 0);
 
       document.getElementById("kpiScore").textContent = `${pct}%`;
-      document.getElementById("kpiScoreSub").textContent = `${passing} of ${total} ${fw} safeguards passing`;
+      document.getElementById("kpiScoreSub").textContent = `${passing} of ${total} checks passing`;
       document.getElementById("kpiExceptions").textContent = openItems;
       document.getElementById("kpiWaivers").textContent = state.exceptions.length;
       document.getElementById("kpiUsers").textContent = state.totalUsers;
@@ -855,7 +855,7 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
         const code = codeMap[ctrl.key] || ctrl.key.toUpperCase();
         const badge = ctrl.status === "PASS"
           ? `<span class="badge badge-pass">PASS</span>`
-          : `<span class="badge badge-fail">ACTION NEEDED</span>`;
+          : `<span class="badge badge-fail">FLAGGED</span>`;
         const isOpen = !!state.expandedRows[idx];
         const hasItems = ctrl.items && ctrl.items.length > 0;
 
@@ -873,11 +873,11 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
             <tr class="drawer-row">
               <td colspan="5">
                 <div class="drawer-header">
-                  <span>Practice Audit Findings — ${escapeHtml(code)}</span>
-                  <button class="btn btn-primary btn-sm" onclick="openActionModal(${idx})">IT Fix / Privacy Officer Sign-Off</button>
+                  <span>Check Details — ${escapeHtml(code)}</span>
+                  <button class="btn btn-primary btn-sm" onclick="openActionModal(${idx})">IT Snippet / Review Note</button>
                 </div>
                 <table class="sub-table">
-                  <thead><tr><th>Staff Member / App</th><th>Account / Scope</th><th>Risk Detail</th><th>Detected</th></tr></thead>
+                  <thead><tr><th>Account / App</th><th>Identifier</th><th>Finding Note</th><th>Date</th></tr></thead>
                   <tbody>${rows}</tbody>
                 </table>
               </td>
@@ -893,8 +893,8 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
             <td style="color:var(--muted);">${escapeHtml(ctrl.summary)}</td>
             <td>
               <div class="action-cell">
-                ${hasItems ? `<button class="btn btn-outline btn-sm" onclick="toggleRow(${idx})">${isOpen ? "Hide" : "Review"} (${ctrl.items.length})</button>` : ""}
-                <button class="btn btn-outline btn-sm" onclick="openActionModal(${idx})">Fix / Sign-Off</button>
+                ${hasItems ? `<button class="btn btn-outline btn-sm" onclick="toggleRow(${idx})">${isOpen ? "Hide" : "Inspect"} (${ctrl.items.length})</button>` : ""}
+                <button class="btn btn-outline btn-sm" onclick="openActionModal(${idx})">Snippet / Note</button>
               </div>
             </td>
           </tr>
@@ -904,12 +904,12 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
 
       const tbodyEx = document.getElementById("tbodyExceptions");
       tbodyEx.innerHTML = state.exceptions.length === 0
-        ? `<tr><td colspan="5" style="color:var(--muted);text-align:center;">No Privacy Officer sign-offs logged yet. Click "Fix / Sign-Off" on any safeguard to document a BAA or approved exception.</td></tr>`
+        ? `<tr><td colspan="5" style="color:var(--muted);text-align:center;">No review notes logged yet. Click "Snippet / Note" on any check to record a note or BAA reference.</td></tr>`
         : state.exceptions.map(ex => `
           <tr>
             <td><span class="badge badge-code">${escapeHtml(ex.code)}</span></td>
             <td><strong>${escapeHtml(ex.target)}</strong></td>
-            <td><span class="badge badge-warn">Approved / BAA Verified</span></td>
+            <td><span class="badge badge-warn">Noted</span></td>
             <td style="color:var(--muted);">${escapeHtml(ex.note)}</td>
             <td style="color:var(--muted);">${escapeHtml(ex.timestamp)}</td>
           </tr>
@@ -937,7 +937,7 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
       activeControlIdx = idx;
       const fw = document.getElementById("frameworkSelect").value || "HIPAA";
       const code = (FRAMEWORK_CODES[fw] || FRAMEWORK_CODES.HIPAA)[state.controls[idx].key];
-      document.getElementById("actionModalTitle").textContent = `${code} — IT Handoff & Privacy Officer Sign-Off`;
+      document.getElementById("actionModalTitle").textContent = `${code} — Dry-Run Snippet & Review Note`;
       document.getElementById("actionModalDesc").textContent = state.controls[idx].title;
       document.getElementById("actionScriptBox").textContent = state.controls[idx].script;
       document.getElementById("waiverNoteInput").value = "";
@@ -946,12 +946,12 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
 
     function copyActionScript() {
       navigator.clipboard.writeText(document.getElementById("actionScriptBox").textContent);
-      alert("IT handoff script copied to clipboard!");
+      alert("Dry-run snippet copied to clipboard!");
     }
 
     function recordExceptionWaiver() {
       const note = document.getElementById("waiverNoteInput").value.trim();
-      if (!note) return alert("Please enter a brief BAA or Privacy Officer justification.");
+      if (!note) return alert("Please enter a brief review note or BAA reference.");
       const fw = document.getElementById("frameworkSelect").value || "HIPAA";
       const ctrl = state.controls[activeControlIdx];
       const code = (FRAMEWORK_CODES[fw] || FRAMEWORK_CODES.HIPAA)[ctrl.key];
@@ -962,20 +962,20 @@ Update-MgServicePrincipal -ServicePrincipalId "<ServicePrincipalId>" -AccountEna
         timestamp: new Date().toLocaleString()
       });
       ctrl.status = "PASS";
-      ctrl.summary = `Signed off by Privacy Officer (${state.exceptions.length} documented)`;
+      ctrl.summary = `Review note recorded (${state.exceptions.length} logged)`;
       document.getElementById("actionModal").classList.remove("open");
       render();
     }
 
     function copyItHandoffNote() {
-      const note = `Hi team — we're running a zero-PHI HIPAA access & AI app check on ComplyPulse (https://comply.profitharborai.com). It only reads identity, MFA, guest, and OAuth app metadata (no patient charts or email bodies are accessed). Could you create a read-only Entra ID app registration with User.Read.All, AuditLog.Read.All, and Application.Read.All (admin consent granted) and share the Directory (Tenant) ID, Application (Client) ID, and Client Secret so we can run the audit?`;
+      const note = `Hi team — we're reviewing a Microsoft 365 access & third-party app check on ComplyPulse (https://comply.profitharborai.com). It queries read-only Microsoft Graph metadata (User.Read.All, AuditLog.Read.All, Application.Read.All) rather than EHR charts or email message bodies. Could you provision a read-only Entra ID app registration with admin consent and share the Directory (Tenant) ID, Application (Client) ID, and Client Secret for a test scan?`;
       navigator.clipboard.writeText(note);
-      alert("Plain-English message for your IT / MSP copied to clipboard!");
+      alert("Note for your IT / MSP copied to clipboard!");
     }
 
     function copySetupScript() {
       const script = `# Share with your IT Admin or MSP (Run in Azure Cloud Shell with az login)
-$AppName = "ComplyPulse-ReadOnly-HIPAA-Audit"
+$AppName = "ComplyPulse-ReadOnly-Audit"
 $TenantId = (az account show --query tenantId -o tsv)
 $AppId = (az ad app create --display-name $AppName --query appId -o tsv)
 az ad sp create --id $AppId | Out-Null
@@ -984,14 +984,14 @@ az ad app permission admin-consent --id $AppId
 $Secret = (az ad app credential reset --id $AppId --append --years 1 --query password -o tsv)
 Write-Host "Directory ID: $TenantId | App ID: $AppId | Secret: $Secret" -ForegroundColor Cyan`;
       navigator.clipboard.writeText(script);
-      alert("Read-Only IT setup script copied!");
+      alert("Read-only setup script copied!");
     }
 
     function exportAuditorPdf() {
       const fw = document.getElementById("frameworkSelect").value || "HIPAA";
       const codeMap = FRAMEWORK_CODES[fw] || FRAMEWORK_CODES.HIPAA;
       const win = window.open("", "_blank");
-      if (!win) return alert("Please allow pop-ups to generate the HIPAA Risk Analysis PDF.");
+      if (!win) return alert("Please allow pop-ups to generate the Access Risk Report PDF.");
 
       const rows = state.controls.map(c => `
         <tr>
@@ -1012,19 +1012,21 @@ Write-Host "Directory ID: $TenantId | App ID: $AppId | Secret: $Secret" -Foregro
       `).join("");
 
       win.document.write([
-        "<!DOCTYPE html><html><head><title>ComplyPulse — HIPAA Technical Safeguards Risk Analysis</title>",
+        "<!DOCTYPE html><html><head><title>ComplyPulse — Access Risk Report</title>",
         "<style>body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#0f172a;padding:36px;max-width:900px;margin:0 auto;}",
-        ".hdr{display:flex;justify-content:space-between;border-bottom:2px solid #0d9488;padding-bottom:14px;margin-bottom:22px;}",
+        ".hdr{display:flex;justify-content:space-between;border-bottom:2px solid #0d9488;padding-bottom:14px;margin-bottom:16px;}",
+        ".scope-note{background:#f8fafc;border:1px solid #cbd5e1;padding:10px 12px;font-size:11.5px;color:#334155;border-radius:6px;margin-bottom:18px;}",
         "h2{font-size:14px;text-transform:uppercase;color:#334155;margin:22px 0 8px;}",
         "table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:18px;}",
         "th{background:#f1f5f9;text-align:left;padding:8px 10px;border-bottom:1px solid #cbd5e1;font-size:11px;text-transform:uppercase;}",
         "td{padding:8px 10px;border-bottom:1px solid #e2e8f0;}</style></head><body>",
-        `<div class="hdr"><div><strong style="font-size:20px;">ComplyPulse — ${escapeHtml(fw)} Security Risk Analysis Packet</strong></div>`,
-        `<div style="text-align:right;font-size:12px;"><strong>${escapeHtml(state.workspaceName)}</strong><br/>Audit Date: ${new Date().toLocaleString()}</div></div>`,
-        `<h2>1. Automated Safeguard Verification (${escapeHtml(fw)})</h2>`,
-        `<table><thead><tr><th>Rule</th><th>Safeguard Requirement</th><th>Status</th><th>Practice Audit Findings</th></tr></thead><tbody>${rows}</tbody></table>`,
-        `<h2>2. Privacy Officer Sign-Offs &amp; Verified BAAs</h2>`,
-        `<table><thead><tr><th>Rule</th><th>Staff / Vendor App</th><th>Documented Justification</th><th>Timestamp</th></tr></thead><tbody>${waiverRows || '<tr><td colspan="4">No exceptions logged.</td></tr>'}</tbody></table>`,
+        `<div class="hdr"><div><strong style="font-size:20px;">ComplyPulse — Access Risk Report (${escapeHtml(fw)} Reference)</strong></div>`,
+        `<div style="text-align:right;font-size:12px;"><strong>${escapeHtml(state.workspaceName)}</strong><br/>Report Date: ${new Date().toLocaleString()}</div></div>`,
+        `<div class="scope-note"><strong>Scope Note:</strong> This snapshot reflects targeted Microsoft 365 access and app checks (${escapeHtml(state.modeLabel)}) and does not constitute a complete organizational HIPAA Security Risk Analysis.</div>`,
+        `<h2>1. Access &amp; App Check Summary</h2>`,
+        `<table><thead><tr><th>Ref</th><th>Check</th><th>Status</th><th>Findings Summary</th></tr></thead><tbody>${rows}</tbody></table>`,
+        `<h2>2. Logged Review Notes &amp; Exceptions</h2>`,
+        `<table><thead><tr><th>Ref</th><th>Account / App</th><th>Reviewer Note</th><th>Timestamp</th></tr></thead><tbody>${waiverRows || '<tr><td colspan="4">No review notes logged.</td></tr>'}</tbody></table>`,
         `<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="window.print()" style="display:none;" />`,
         `</body></html>`
       ].join(""));
@@ -1034,14 +1036,14 @@ Write-Host "Directory ID: $TenantId | App ID: $AppId | Secret: $Secret" -Foregro
     function exportEvidenceCsv() {
       const fw = document.getElementById("frameworkSelect").value || "HIPAA";
       const codeMap = FRAMEWORK_CODES[fw] || FRAMEWORK_CODES.HIPAA;
-      const rows = [["Practice", "Framework", "Rule_ID", "Requirement", "Status", "Summary", "Collected_At"]];
+      const rows = [["Practice", "Reference", "Code", "Check", "Status", "Summary", "Mode", "Exported_At"]];
       state.controls.forEach(c => {
-        rows.push([state.workspaceName, fw, codeMap[c.key] || c.key, c.title, c.status, c.summary, new Date().toISOString()]);
+        rows.push([state.workspaceName, fw, codeMap[c.key] || c.key, c.title, c.status, c.summary, state.modeLabel, new Date().toISOString()]);
       });
       const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
       const a = document.createElement("a");
       a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
-      a.download = `ComplyPulse-${fw}-Risk-Analysis.csv`;
+      a.download = `ComplyPulse-${fw}-Access-Risk-Report.csv`;
       a.click();
     }
 
